@@ -2,7 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require ('cors');
 const morgan = require ('morgan');
-const errorHandler = require ('errorhandler')
+const errorHandler = require ('errorhandler');
+
+const apiRouter = require('./api/api');
 
 const app = express();
 
@@ -20,6 +22,8 @@ app.use(cors());
 app.use(errorHandler())
 app.use(morgan('dev'));
 
-app.listen(PORT,()=>{console.log(`server running on port ${port}`)});
+app.use('/api',apiRouter);
 
-export default app; // module.exports = app
+app.listen(port,()=>{console.log(`server running on port ${port}`)});
+
+module.exports = app; // module.exports = app
